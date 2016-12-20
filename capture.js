@@ -2,6 +2,7 @@ const electron = require('electron')
 const { ipcRenderer: ipc, desktopCapturer, screen } = electron
 const path = require('path')
 const fs = require('fs')
+const moment = require('moment')
 
 onCapture()
 function onCapture() {
@@ -9,7 +10,7 @@ function onCapture() {
         console.log('Capturing...')
         getMainSource(desktopCapturer, screen, source => {
             const png = source.thumbnail.toPng()
-            const filePath = path.join('c:\\temp\\screencap\\', new Date() + '.png')
+            const filePath = path.join('c:\\temp\\', moment().format('HHmmss') + '.png')
             writeScreenshot(png, filePath);
         })
     }, 3000)
